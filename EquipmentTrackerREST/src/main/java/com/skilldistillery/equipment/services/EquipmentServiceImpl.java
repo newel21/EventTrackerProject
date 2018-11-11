@@ -1,6 +1,7 @@
 package com.skilldistillery.equipment.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,26 +22,50 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 	@Override
 	public Equipment show(int id) {
-		// TODO Auto-generated method stub
+		Equipment equipment = null;
+		Optional<Equipment> opt = repo.findById(id);
+		if(opt.isPresent()) {
+			equipment = opt.get();
+			return equipment;
+		}
 		return null;
 	}
 
 	@Override
-	public Equipment create(Equipment post) {
-		// TODO Auto-generated method stub
-		return null;
+	public Equipment create(Equipment equipment) {
+		repo.saveAndFlush(equipment);
+		return equipment;
 	}
 
 	@Override
-	public Equipment update(Equipment repPost, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Equipment update(Equipment equipment, int id) {
+//		Equipment managedEquipment = null;
+		Optional<Equipment> opt = repo.findById(id);
+		if(opt.isPresent()) {
+//			System.err.println(equipment.getName());
+//			managedEquipment.setName(equipment.getName());
+//			managedEquipment.setDescription(equipment.getDescription());
+//			managedEquipment.setNsn(equipment.getNsn());
+//			managedEquipment.setSerial(equipment.getSerial());
+//			managedEquipment.setQuantity(equipment.getQuantity());
+			equipment.setId(id);
+			repo.saveAndFlush(equipment);
+		}
+		
+		return equipment;
 	}
 
 	@Override
-	public Boolean delete(Equipment post) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean delete(int id) {
+		boolean deleted = false;
+		try {
+		repo.deleteById(id);
+		deleted = true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return deleted;
 	}
 
 }

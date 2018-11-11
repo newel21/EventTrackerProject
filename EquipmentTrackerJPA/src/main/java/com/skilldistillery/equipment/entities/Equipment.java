@@ -1,12 +1,10 @@
 package com.skilldistillery.equipment.entities;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Equipment {
@@ -27,8 +25,6 @@ public class Equipment {
 	
 	private int quantity;
 	
-	@CreationTimestamp
-	private Date date;
 
 	public int getId() {
 		return id;
@@ -78,13 +74,6 @@ public class Equipment {
 		this.quantity = quantity;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
 	@Override
 	public int hashCode() {
@@ -111,14 +100,14 @@ public class Equipment {
 	@Override
 	public String toString() {
 		return "Equipment [id=" + id + ", name=" + name + ", description=" + description + ", nsn=" + nsn + ", serial="
-				+ serial + ", quantity=" + quantity + ", date=" + date + "]";
+				+ serial + ", quantity=" + quantity + "]";
 	}
 	
 	public Equipment() {
 		
 	}
 
-	public Equipment(int id, String name, String description, String nsn, String serial, int quantity, Date date) {
+	public Equipment(int id, String name, String description, String nsn, String serial, int quantity) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -126,7 +115,6 @@ public class Equipment {
 		this.nsn = nsn;
 		this.serial = serial;
 		this.quantity = quantity;
-		this.date = date;
 	}
 	
 	

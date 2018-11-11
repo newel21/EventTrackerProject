@@ -8,9 +8,9 @@ public interface EquipmentService {
 	
 	List<Equipment> index();
 	Equipment show(int id);
-	Equipment create(Equipment post);
-	Equipment update(Equipment repPost, int id);
-	Boolean delete(Equipment post);
+	Equipment create(Equipment equipment);
+	Equipment update(Equipment equipment, int id);
+	Boolean delete(int id);
 
 
 }
