@@ -1,4 +1,4 @@
-## Event Tracker Project - Weekend 11 Skill Distillery Project
+# Event Tracker Project - Weekend 11 Skill Distillery Project
 
 ### How the program works: Equipment Tracker
 The program has an Entity (equipment) where a full CRUD functionality can be
