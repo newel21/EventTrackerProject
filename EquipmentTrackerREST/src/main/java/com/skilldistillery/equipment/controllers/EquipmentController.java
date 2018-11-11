@@ -24,18 +24,21 @@ public class EquipmentController {
 	@Autowired
 	EquipmentService eSvc;
 	
+	// this is just to test whether I can access my entity in post man for testing purposes
 	@GetMapping("ping")
 	public String ping() {
 		return "pong";
 		
 	}
 	
+	// shows the list of item/entity
 	@GetMapping("equipment")
 	public List<Equipment> showAllEquipment(){
 		return eSvc.index();
 		
 	}
 	
+	// shows a specific item/entity based on the id provided
 	@GetMapping("equipment/{id}")
 	public Equipment showEquipmentById(@PathVariable("id") int id, HttpServletResponse resp) {
 		Equipment equip =  eSvc.show(id);
@@ -46,6 +49,7 @@ public class EquipmentController {
 		
 	}
 	
+	// add an item/entity to the list through a create method
 	@PostMapping("equipment")
 	public Equipment createEquipment(@RequestBody Equipment equipment) {
 		Equipment equip = eSvc.create(equipment);
@@ -53,6 +57,7 @@ public class EquipmentController {
 		
 	}
 	
+	// able to edit a specific item/entity based on the id provided
 	@PutMapping("equipment/{id}")
 	public Equipment updateEquipment(@RequestBody Equipment equipment, @PathVariable("id") int id) {
 		equipment = eSvc.update(equipment, id);		
@@ -60,6 +65,7 @@ public class EquipmentController {
 		
 	}
 	
+	// able to delete a specific item/entity based on the id provided
 	@DeleteMapping("equipment/{id}")
 	public Boolean deleteEquipment(@PathVariable("id") int id, HttpServletResponse resp) {
 		Boolean result = eSvc.delete(id);
