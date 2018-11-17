@@ -51,8 +51,13 @@ public class EquipmentController {
 	
 	// add an item/entity to the list through a create method
 	@PostMapping("equipment")
-	public Equipment createEquipment(@RequestBody Equipment equipment) {
+	public Equipment createEquipment(@RequestBody Equipment equipment, HttpServletResponse resp) {	
 		Equipment equip = eSvc.create(equipment);
+		if (equip != null) {
+			resp.setStatus(201);
+		}else {
+			resp.setStatus(400);
+		}
 		return equip;
 		
 	}

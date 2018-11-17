@@ -1,10 +1,11 @@
 window.addEventListener('load', function(e) {
 	console.log('document loaded');
-	showEquipment(getEquipment);
+	showEquipment();
+	newEquipment();
 
 });
 
-function showEquipment(getEquipment) {
+function showEquipment() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'api/equipment');
 	xhr.onreadystatechange = function() {
@@ -21,10 +22,12 @@ function showEquipment(getEquipment) {
 		}
 	}
 	xhr.send();
+
 }
 
 function getEquipment(equipment) {
 	var dataDiv = document.getElementById('showTable');
+	dataDiv.textContent = "";
 
 	var table = document.createElement('table');
 	dataDiv.appendChild(table);
@@ -56,7 +59,6 @@ function getEquipment(equipment) {
 		tr.appendChild(quantityTH);
 
 
-
 	var tbody = document.createElement('tbody');
 	table.appendChild(tbody);
 
@@ -85,36 +87,42 @@ function getEquipment(equipment) {
 		quantity.textContent = equipment[i].quantity;
 		tr.appendChild(quantity);
 
-
 	}
+
 }
 
-// function getEquipment(equipment) {
-// 	var tableDiv = document.getElementById('table');
-//
-// 	if(typeof equipment === 'object') {
-// 		var name = document.createElement('blockquote');
-// 		name.textContent = equipment[0].name;
-// 		tableDiv.appendChild(name);
-//
-// 		var uList = document.createElement('ul');
-// 		tableDiv.appendChild(uList);
-//
-// 		var description = document.createElement('li');
-// 		description.textContent = equipment[0].description;
-// 		uList.appendChild(description);
-//
-// 		var nsn = document.createElement('li');
-// 		nsn.textContent = equipment[0].nsn;
-// 		uList.appendChild(nsn);
-//
-// 		var serial = document.createElement('li');
-// 		serial.textContent = equipment[0].serial;
-// 		uList.appendChild(serial);
-//
-// 		var quantity = document.createElement('li');
-// 		quantity.textContent = equipment[0].quantity;
-// 		uList.appendChild(quantity);
-//
-//
-// 	}
+function newEquipment() {
+	document.addEquipment.submit.addEventListener('click', function(e) {
+		e.preventDefault();
+		let form = e.target.parentElement;
+		console.log(form);
+		console.log(e.target);
+		let equipment = {
+				name: form.name.value,
+				description: form.description.value,
+				nsn: form.nsn.value,
+				serial: form.serial.value,
+				quantity: form.quantity.value,
+
+		};
+		console.log(equipment);
+		addNewEquipment(equipment);
+	});
+
+}
+
+function addNewEquipment(equipment) {
+    let xhr = new XMLHttpRequest();
+    let eqJson = JSON.stringify(equipment);
+    xhr.open('POST', 'api/equipment');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 201) {
+                let addedEquipment = JSON.parse(xhr.responseText);
+                showEquipment();
+            }
+        }
+    };
+    xhr.send(eqJson);
+}
