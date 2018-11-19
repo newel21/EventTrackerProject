@@ -56,7 +56,11 @@ function getEquipment(equipment) {
 
 	var quantityTH = document.createElement('th');
 	quantityTH.textContent = "QTY";
-		tr.appendChild(quantityTH);
+	tr.appendChild(quantityTH);
+
+	var priceTH = document.createElement('th');
+	priceTH.textContent = "Price";
+	tr.appendChild(priceTH);
 
 
 	var tbody = document.createElement('tbody');
@@ -64,6 +68,9 @@ function getEquipment(equipment) {
 
 	for (var i = 0; i < equipment.length; i++) {
 		var tr = document.createElement('tr');
+		tr.addEventListener('click', function(e) {
+			getEquipmentById(equipment.id);
+		});
 		tr.id = equipment[i].id;
 		tbody.appendChild(tr);
 
@@ -87,6 +94,9 @@ function getEquipment(equipment) {
 		quantity.textContent = equipment[i].quantity;
 		tr.appendChild(quantity);
 
+		var price = document.createElement('td');
+		price.textContent = equipment[i].price;
+		tr.appendChild(price);
 	}
 
 }
@@ -103,7 +113,7 @@ function newEquipment() {
 				nsn: form.nsn.value,
 				serial: form.serial.value,
 				quantity: form.quantity.value,
-
+				price: form.price.value
 		};
 		console.log(equipment);
 		addNewEquipment(equipment);
@@ -125,4 +135,56 @@ function addNewEquipment(equipment) {
         }
     };
     xhr.send(eqJson);
+}
+
+function eachEquipmentDetails(equipment) {
+    let eachEquipmentDiv = document.getElementById('eachEquipmentDiv');
+    eachEquipmentDiv.textContent = "";
+
+    let uList = document.createElement('ul');
+    eachEquipmentDiv.appendChild(uList);
+
+    let eachName = document.createElement('li');
+    eachName.textContent = equipment.name;
+    uList.appendChild(eachName);
+
+    let eachDescription = document.createElement('li');
+    eachDescription.textContent = equipment.description;
+    uList.appendChild(eachDescription);
+
+    let eachNsn = document.createElement('li');
+    eachNsn.textContent = equipment.nsn;
+    uList.appendChild(eachNsn);
+
+    let eachSerial = document.createElement('li');
+    eachSerial.textContent = equipment.serial;
+    uList.appendChild(eachSerial);
+
+    let eachQuantity = document.createElement('li');
+    eachQuantity.textContent = equipment.quantity;
+    uList.appendChild(eachQuantity);
+
+    let eachPrice = document.createElement('li');
+    eachPrice.textContent = equipment.price;
+    uList.appendChild(eachPrice);
+
+}
+
+function getEquipmentById(equipmentId) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'api/equipment/' + equipmentId);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log('success');
+                let response = xhr.responseText;
+                let equipment = JSON.parse(response);
+                eachEquipmentDetails(equipment);
+            }
+            else {
+                console.log('unsuccessful');
+            }
+        }
+    };
+    xhr.send();
 }

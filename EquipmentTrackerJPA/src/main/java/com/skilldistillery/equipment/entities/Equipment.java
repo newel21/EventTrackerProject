@@ -25,6 +25,16 @@ public class Equipment {
 	
 	private int quantity;
 	
+	private double price;
+	
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public int getId() {
 		return id;
@@ -100,7 +110,7 @@ public class Equipment {
 	@Override
 	public String toString() {
 		return "Equipment [id=" + id + ", name=" + name + ", description=" + description + ", nsn=" + nsn + ", serial="
-				+ serial + ", quantity=" + quantity + "]";
+				+ serial + ", quantity=" + quantity + ", price=" + price + "]";
 	}
 	
 	public Equipment() {
@@ -115,6 +125,17 @@ public class Equipment {
 		this.nsn = nsn;
 		this.serial = serial;
 		this.quantity = quantity;
+	}
+
+	public Equipment(int id, String name, String description, String nsn, String serial, int quantity, double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.nsn = nsn;
+		this.serial = serial;
+		this.quantity = quantity;
+		this.price = price;
 	}
 	
 	

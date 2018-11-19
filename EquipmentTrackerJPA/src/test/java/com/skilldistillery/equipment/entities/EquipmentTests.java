@@ -42,12 +42,11 @@ class EquipmentTests {
 	@Test
 	void test_Equipment_mapping() {
 		assertEquals("M4/M4A1 5.56mm Carbine", equipment.getName());
-		assertEquals("The M4/M4A1 5.56mm Carbine is a lightweight, "
-				+ "gas operated, air cooled, magazine fed, selective rate, "
-				+ "shoulder fired weapon with a collapsible stock.", equipment.getDescription());
+		assertEquals("The M4/M4A1 5.56mm Carbine is a lightweight rifle", equipment.getDescription());
 		assertEquals("1005012310973", equipment.getNsn());
 		assertEquals("M412345", equipment.getSerial());
 		assertEquals(1, equipment.getQuantity());
+		assertEquals(634, equipment.getPrice());
 	}
 
 }

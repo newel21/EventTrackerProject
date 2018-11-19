@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `Equipment` (
   `national_stock_number` VARCHAR(20) NOT NULL,
   `serial_number` VARCHAR(45) NULL,
   `quantity` INT(10) NOT NULL,
+  `price` INT(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -46,10 +47,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `equipmentdb`;
-INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`) VALUES (1, 'M4/M4A1 5.56mm Carbine', 'The M4/M4A1 5.56mm Carbine is a lightweight rifle', '1005012310973', 'M412345', 1);
-INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`) VALUES (2, 'RT-1523E(C)/U (ASIP R/T)', 'RECEIVER-TRANSMITTER, RADIO', '5820014441219', 'R234590', 2);
-INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`) VALUES (3, 'M998 (HMMWV) TRUCK, UTILITY', 'CARGO/TROOP CARRIER, 1-1/4 TON', '2320011077155', 'TM0873-10', 1);
-INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`) VALUES (4, 'PISTOL, 9MM', 'SEMIAUTOMATIC, M9, BERETTA', '1005011182640', 'M9-0034', 5);
+INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`, `price`) VALUES (1, 'M4/M4A1 5.56mm Carbine', 'The M4/M4A1 5.56mm Carbine is a lightweight rifle', '1005012310973', 'M412345', 1, 633.80);
+INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`, `price`) VALUES (2, 'RT-1523E(C)/U (ASIP R/T)', 'RECEIVER-TRANSMITTER, RADIO', '5820014441219', 'R234590', 2, 501235);
+INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`, `price`) VALUES (3, 'M998 (HMMWV) TRUCK, UTILITY', 'CARGO/TROOP CARRIER, 1-1/4 TON', '2320011077155', 'TM0873-10', 1, 789234.30);
+INSERT INTO `Equipment` (`id`, `name`, `description`, `national_stock_number`, `serial_number`, `quantity`, `price`) VALUES (4, 'PISTOL, 9MM', 'SEMIAUTOMATIC, M9, BERETTA', '1005011182640', 'M9-0034', 5, 560.20);
 
 COMMIT;
 
